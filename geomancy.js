@@ -61,6 +61,8 @@ function startCasting() {
     currentMother = [];
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     castingArea.querySelector('p').textContent = `Cast dots for line 1 of Mother 1.`;
+    confirmLineBtn.disabled = false;
+    confirmMotherBtn.disabled = true;
 }
 
 canvas.addEventListener('mousedown', (e) => {
@@ -76,7 +78,7 @@ canvas.addEventListener('mousedown', (e) => {
 });
 
 function confirmLine() {
-    console.log('confirmLine called', { dots: dots.length, currentLine });
+    console.log('confirmLine called', { dots: dots.length, currentLine, currentMother });
     if (dots.length === 0) {
         alert('Please cast at least one dot.');
         return;
@@ -87,17 +89,22 @@ function confirmLine() {
     dots = [];
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     currentLine++;
+    
     if (currentLine < 4) {
         castingArea.querySelector('p').textContent = `Cast dots for line ${currentLine + 1} of Mother ${mothers.length + 1}.`;
+        confirmLineBtn.disabled = false;
+        confirmMotherBtn.disabled = true;
     } else {
-        castingArea.querySelector('p').textContent = 'Confirm your Mother figure or cast another line.';
+        castingArea.querySelector('p').textContent = `Four lines completed for Mother ${mothers.length + 1}. Please confirm this Mother to proceed.`;
+        confirmLineBtn.disabled = true; // Disable Confirm Line until Mother is confirmed
+        confirmMotherBtn.disabled = false;
     }
 }
 
 function confirmMother() {
-    console.log('confirmMother called', { currentMother });
+    console.log('confirmMother called', { currentMother, mothers });
     if (currentMother.length !== 4) {
-        alert('Please complete all four lines.');
+        alert('Please complete all four lines for this Mother.');
         return;
     }
     mothers.push(currentMother);
@@ -105,10 +112,15 @@ function confirmMother() {
     currentMother = [];
     currentLine = 0;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
     if (mothers.length < 4) {
         castingArea.querySelector('p').textContent = `Cast dots for line 1 of Mother ${mothers.length + 1}.`;
+        confirmLineBtn.disabled = false;
+        confirmMotherBtn.disabled = true;
     } else {
         castingArea.style.display = 'none';
+        confirmLineBtn.disabled = true;
+        confirmMotherBtn.disabled = true;
         generateChart();
     }
 }
