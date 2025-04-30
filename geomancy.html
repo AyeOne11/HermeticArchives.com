@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geomancy Oracle - Hermetic Mysteries</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <img src="images/header-eye.jpg" alt="Celestial All-Seeing Eye Header" class="header-image">
+        <h1>Geomancy Oracle</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="history.html">History</a>
+            <a href="art.html">Art</a>
+            <a href="relics.html">Relics</a>
+            <a href="geomancy.html">Geomancy</a>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h2>Cast Your Geomantic Oracle</h2>
+            <p class="tagline">“Seek the wisdom of the earth and stars, as Agrippa did.”</p>
+            <p>Enter your question and engage in the ancient art of geomancy, guided by the Hermetic tradition. Click or drag on the canvas to cast dots, forming the sacred figures that reveal hidden truths.</p>
+            <form id="geomancy-form">
+                <label for="question">Your Question:</label><br>
+                <textarea id="question" rows="4" cols="50" required placeholder="What guidance do you seek?"></textarea><br>
+                <button type="button" id="start-casting-btn">Begin Casting</button>
+            </form>
+            <div id="casting-area" style="display: none;">
+                <canvas id="geomancy-canvas" width="600" height="200"></canvas>
+                <p>Click or drag to create dots for each line, then confirm. Complete four lines to form a Mother figure.</p>
+                <button type="button" id="confirm-line-btn">Confirm Line</button>
+                <button type="button" id="confirm-mother-btn">Confirm Mother</button>
+            </div>
+            <div id="geomantic-chart"></div>
+            <div id="interpretation"></div>
+        </section>
+    </main>
+    <footer>
+        <p>© 2025 Hermetic Mysteries</p>
+    </footer>
+    <script src="geomancy.js" defer></script>
+</body>
+</html>
